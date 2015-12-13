@@ -1,5 +1,5 @@
 #    Back In Time
-#    Copyright (C) 2008-2015 Oprea Dan, Bart de Koning, Richard Bailey, Germar Reitze
+#    Copyright (C) 2008-2015 Oprea Dan, Bart de Koning, Richard Bailey, Germar Reitze, Taylor Raack
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -764,6 +764,17 @@ class SettingsDialog( QDialog ):
                 'This may be fixed in a future version.'
                 )
 
+        self.cb_preserve_hard_links = QCheckBox( _( 'Preserve Hard Links' ), self )
+        self.cb_preserve_hard_links.setToolTip(
+                'uses \'rsync -H\'\n'
+                'From \'man rsync\':\n'
+                'This tells rsync to look for hard-linked files in the source\n'
+                'and link together the corresponding files on the destination.\n'
+                'Without this option, hard-linked files in the source are treated\n'
+                'as though they were separate files.'
+                )
+        layout.addWidget( self.cb_preserve_hard_links )
+
         self.cb_preserve_acl = QCheckBox( _( 'Preserve ACL' ), self )
         self.cb_preserve_acl.setToolTip(
                 'uses \'rsync -A\'\n'
@@ -1135,6 +1146,7 @@ class SettingsDialog( QDialog ):
         self.cb_redirect_stderr.setChecked(self.config.redirect_stderr_in_cron())
         self.cb_bwlimit.setChecked( self.config.bwlimit_enabled() )
         self.sb_bwlimit.setValue( self.config.bwlimit() )
+        self.cb_preserve_hard_links.setChecked( self.config.preserve_hard_links() )
         self.cb_preserve_acl.setChecked( self.config.preserve_acl() )
         self.cb_preserve_xattr.setChecked( self.config.preserve_xattr() )
         self.cb_copy_unsafe_links.setChecked( self.config.copy_unsafe_links() )
@@ -1153,6 +1165,9 @@ class SettingsDialog( QDialog ):
             if not tools.check_cron_pattern(self.txt_automatic_snapshots_time_custom.text() ):
                 self.error_handler( _('Custom Hours can only be a comma seperate list of hours (e.g. 8,12,18,23) or */3 for periodic backups every 3 hours') )
                 return False
+
+        # TODO - f user has selected hard link preservation (which should be on at least for full system backup),
+        # verify that destination supports hard-links, or that user doesn't care that it doesn't
 
         #mode
         mode = str( self.combo_modes.itemData( self.combo_modes.currentIndex() ) )
@@ -1274,6 +1289,7 @@ class SettingsDialog( QDialog ):
         self.config.set_redirect_stderr_in_cron(self.cb_redirect_stderr.isChecked())
         self.config.set_bwlimit_enabled( self.cb_bwlimit.isChecked() )
         self.config.set_bwlimit( self.sb_bwlimit.value() )
+        self.config.set_preserve_hard_links( self.cb_preserve_hard_links.isChecked() )
         self.config.set_preserve_acl( self.cb_preserve_acl.isChecked() )
         self.config.set_preserve_xattr( self.cb_preserve_xattr.isChecked() )
         self.config.set_copy_unsafe_links( self.cb_copy_unsafe_links.isChecked() )

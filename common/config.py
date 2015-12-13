@@ -1,5 +1,5 @@
 #    Back In Time
-#    Copyright (C) 2008-2015 Oprea Dan, Bart de Koning, Richard Bailey, Germar Reitze
+#    Copyright (C) 2008-2015 Oprea Dan, Bart de Koning, Richard Bailey, Germar Reitze, Taylor Raack
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -1075,6 +1075,14 @@ class Config( configfile.ConfigFileWithProfiles ):
 
     def set_no_on_battery_enabled( self, value, profile_id = None ):
         self.set_profile_bool_value( 'snapshots.no_on_battery', value, profile_id )
+
+    def preserve_hard_links( self, profile_id = None ):
+        #?Preserve hard links. The  source and destination systems must have hard link compatible
+        #?filesystems.
+        return self.get_profile_bool_value( 'snapshots.preserve_hard_links', True, profile_id )
+
+    def set_preserve_hard_links( self, value, profile_id = None ):
+        return self.set_profile_bool_value( 'snapshots.preserve_hard_links', value, profile_id )   
 
     def preserve_acl( self, profile_id = None ):
         #?Preserve ACL. The  source  and  destination  systems must have

@@ -1,5 +1,5 @@
 #    Back In Time
-#    Copyright (C) 2008-2015 Oprea Dan, Bart de Koning, Richard Bailey, Germar Reitze
+#    Copyright (C) 2008-2015 Oprea Dan, Bart de Koning, Richard Bailey, Germar Reitze, Taylor Raack
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -395,6 +395,9 @@ def get_rsync_prefix( config, no_perms = True, use_modes = ['ssh', 'ssh_encfs'] 
         cmd = cmd + ' --copy-links'
     else:
         cmd = cmd + ' --links'
+
+    if config.preserve_hard_links() and 'hardlinks' in caps:
+        cmd = cmd + ' -H'
 
     if config.preserve_acl() and "ACLs" in caps:
         cmd = cmd + ' -A'
