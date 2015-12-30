@@ -16,8 +16,8 @@ addons:
       - python3-dbus
 
 # needed to ensure that python can see the dbus library installed at system level (since travis operates containerized)
-virtualenv:
-  system_site_packages: true
+#virtualenv:
+#  system_site_packages: true
 
 script:
   # compile all files - ensure that syntax is correct
