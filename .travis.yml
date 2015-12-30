@@ -3,8 +3,6 @@
 
 language: python
 
-sudo: true
-
 python:
   - "3.2"
   - "3.3"
@@ -12,24 +10,19 @@ python:
   - "3.5"
   - "3.5-dev" # 3.5 development branch
   - "nightly" # currently points to 3.6-dev
-  
+
+# python3-dbus doesn't have a pip package, so must install at system level
 addons:
   apt:
     packages:
       - python3-dbus
 
-#install:
-#  - pip install python-systemd
-
+# needed to ensure that python can see the dbus library installed at system level (since travis operates containerized)
 virtualenv:
   system_site_packages: true
-  
-# command to install dependencies
-#install: "pip install -r requirements.txt"
 
-# command to run tests
 script:
+  # compile all files - ensure that syntax is correct
   - python -m compileall common common/test common/plugins qt4 qt4/plugins
-# unit tests don't execute properly under travis CI right now
-# to debug, uncomment this line, commit and check in this file on any branch (must have travis CI linked to your github account and travis CI turned on for the BIT repository)
+  # run unit tests - ensure that functionality is correct
   - cd common && ./configure && make test-v
