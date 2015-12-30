@@ -12,17 +12,13 @@ python:
   - "nightly" # currently points to 3.6-dev
 
 # python3-dbus doesn't have a pip package, so must install at system level
-#addons:
-#  apt:
-#    packages:
-#      - python3-dbus
+# can't just using python3-dbus system level apt package, because the python3 version at the system level is python 3.2
+# can't use python 3.2, because argparse unit tests use subunit, which is available only in python 3.4 and up
+# so - must install custom compiled python3-dbus
+# https://abdealijk.wordpress.com/2015/06/09/python-dbus-and-continuous-integration/
 
 before_install:
   - ./install-custom-dbus.sh
-
-# needed to ensure that python can see the dbus library installed at system level (since travis operates containerized)
-#virtualenv:
-#  system_site_packages: true
 
 script:
   # compile all files - ensure that syntax is correct
