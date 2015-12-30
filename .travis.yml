@@ -3,6 +3,8 @@
 
 language: python
 
+sudo: required
+
 python:
   - "3.2"
   - "3.3"
@@ -11,16 +13,17 @@ python:
   - "3.5-dev" # 3.5 development branch
   - "nightly" # currently points to 3.6-dev
   
-addons:
-  apt:
-    packages:
-      - python3-dbus
-      - python3-dbus-dev
+#addons:
+#  apt:
+#    packages:
+#      - python3-dbus
+#      - python3-dbus-dev
 
-#before_install:
-#  - sudo apt-get install python3-dbus python3-dbus-dev 
-#install:
-#  - pip install python-systemd
+before_install:
+  - sudo apt-get install python3-dbus python3-dbus-dev 
+
+install:
+  - pip install python-systemd
   
 # command to install dependencies
 #install: "pip install -r requirements.txt"
