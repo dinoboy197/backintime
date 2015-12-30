@@ -10,10 +10,13 @@ python:
   - "nightly" # currently points to 3.6-dev
 
 # python3-dbus doesn't have a pip package, so must install at system level
-addons:
-  apt:
-    packages:
-      - python3-dbus
+#addons:
+#  apt:
+#    packages:
+#      - python3-dbus
+
+before_install:
+  - ./install-custom-dbus.sh
 
 # needed to ensure that python can see the dbus library installed at system level (since travis operates containerized)
 #virtualenv:
