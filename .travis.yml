@@ -19,4 +19,4 @@ script:
   - python -m compileall common common/test common/plugins qt4 qt4/plugins
 # unit tests don't execute properly under travis CI right now
 # to debug, uncomment this line, commit and check in this file on any branch (must have travis CI linked to your github account and travis CI turned on for the BIT repository)
-#  - cd common && ./configure && make test-v
+  - cd common && ./configure && make test-v
