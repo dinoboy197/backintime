@@ -13,17 +13,16 @@ python:
   - "3.5-dev" # 3.5 development branch
   - "nightly" # currently points to 3.6-dev
   
-#addons:
-#  apt:
-#    packages:
-#      - python3-dbus
-
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install python3-dbus
+addons:
+  apt:
+    packages:
+      - python3-dbus
 
 #install:
 #  - pip install python-systemd
+
+virtualenv:
+  system_site_packages: true
   
 # command to install dependencies
 #install: "pip install -r requirements.txt"
