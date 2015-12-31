@@ -1,3 +1,19 @@
+#    Copyright (C) 2015 Taylor Raack
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License along
+#    with this program; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 echo Trying to find python version...
 
 python_version=`python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))'`
@@ -19,6 +35,8 @@ case "$python_version" in
     echo Python version was not understood. It was detected as - $python_version
     ;;
 esac
+
+sudo apt-get install dbus
 
 echo Downloading python-$headers_version
 wget https://www.python.org/ftp/python/$headers_version/Python-$headers_version.tgz -O python.tar.gz -q
