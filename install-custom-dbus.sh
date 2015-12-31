@@ -40,8 +40,6 @@ sudo apt-get update
 
 sudo apt-get install ${system_python}-dev
 
-#sudo apt-get install libdbus-glib-1-dev
-
 # need dbus 1.6 or greater to compile python-dbus
 echo Downloading dbus...
 wget http://dbus.freedesktop.org/releases/dbus/dbus-1.6.30.tar.gz -O dbus.tar.gz -q
@@ -82,7 +80,7 @@ python_tmpenv=`pwd`/python-tmpenv
 
 cd dbus-python-1.2.0
 
-PYTHON=`sudo which ${system_python}` ./configure PYTHON_INCLUDES="-I$python_src_dir/Include -I$python_src_dir" --prefix=$python_tmpenv
+PYTHON=`sudo which ${system_python}` ./configure --prefix=$python_tmpenv
 make
 make install
 
