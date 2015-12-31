@@ -36,9 +36,10 @@ case "$python_version" in
     ;;
 esac
 
+sudo apt-get update
+
 sudo apt-get install ${system_python}-dev
 
-sudo apt-get update
 #sudo apt-get install libdbus-glib-1-dev
 
 # need dbus 1.6 or greater to compile python-dbus
