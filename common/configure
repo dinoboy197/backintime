@@ -259,7 +259,7 @@ for v in "" "-v"; do
     printf "unittest${v}:\n" >> ${MAKEFILE}
     if [ -z "${PYTEST}" ]; then
     	for i in $(ls -1 test/test_*.py); do
-    		printf "\t$dbus-launch python${PYVERSION} ${v} -m unittest -b $i\n" >> ${MAKEFILE}
+    		printf "\tdbus-launch python${PYVERSION} ${v} -m unittest -b $i\n" >> ${MAKEFILE}
     	done
     else
     	printf "\tpy.test-3 ${v}\n" >> ${MAKEFILE}
