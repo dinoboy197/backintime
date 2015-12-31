@@ -36,7 +36,20 @@ case "$python_version" in
     ;;
 esac
 
-sudo apt-get install dbus
+# need dbus 1.6 or greater to compile python-dbus
+echo Downloading dbus...
+wget http://dbus.freedesktop.org/releases/dbus/dbus-1.6.30.tar.gz -O dbus.tar.gz -q
+echo Unpacking dbus...
+tar -zxvf dbus.tar.gz > /dev/null
+rm dbus.tar.gz
+
+cd dbus-1.6.30
+
+./configure
+make
+sudo make install
+
+cd ..
 
 echo Downloading python-$headers_version
 wget https://www.python.org/ftp/python/$headers_version/Python-$headers_version.tgz -O python.tar.gz -q
