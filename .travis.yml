@@ -11,6 +11,11 @@ python:
   - "3.5-dev" # 3.5 development branch
   - "nightly" # currently points to 3.6-dev
 
+addons:
+  apt:
+    sources:
+    - deadsnakes
+    
 # python3-dbus doesn't have a pip package, so must install at system level
 # can't just using python3-dbus system level apt package, because the python3 version at the system level is python 3.2
 # can't use python 3.2, because argparse unit tests use subunit, which is available only in python 3.4 and up

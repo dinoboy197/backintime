@@ -36,8 +36,10 @@ case "$python_version" in
     ;;
 esac
 
-sudo apt-get update
-sudo apt-get install libdbus-glib-1-dev
+sudo apt-get install ${system_python}-dev
+
+#sudo apt-get update
+#sudo apt-get install libdbus-glib-1-dev
 
 # need dbus 1.6 or greater to compile python-dbus
 echo Downloading dbus...
@@ -54,16 +56,18 @@ sudo make install
 
 cd ..
 
-echo Downloading python-$headers_version
-wget https://www.python.org/ftp/python/$headers_version/Python-$headers_version.tgz -O python.tar.gz -q
-echo Unpacking python...
-tar -zxvf python.tar.gz > /dev/null
-rm python.tar.gz
-echo Configuring Python to get all headers...
-cd Python-*
-python_src_dir=`pwd`
-./configure
+# download python
+#echo Downloading python-$headers_version
+#wget https://www.python.org/ftp/python/$headers_version/Python-$headers_version.tgz -O python.tar.gz -q
+#echo Unpacking python...
+#tar -zxvf python.tar.gz > /dev/null
+#rm python.tar.gz
+#echo Configuring Python to get all headers...
+#cd Python-*
+#python_src_dir=`pwd`
+#./configure
 
+# download python-dbus
 echo Downloading python-dbus...
 wget http://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.0.tar.gz -O dbus-python.tar.gz -q
 echo Unpacking python-dbus...
