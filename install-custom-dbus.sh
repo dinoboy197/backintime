@@ -86,7 +86,7 @@ python_tmpenv=`pwd`/python-tmpenv
 
 cd dbus-python-1.2.0
 
-PYTHON=`sudo which ${system_python}` DBUS_GLIB_CFLAGS="-I/usr/local" DBUS_GLIB_LIBS="" ./configure --prefix=$python_tmpenv
+PYTHON=`sudo which ${system_python}` ./configure --prefix=$python_tmpenv
 make
 make install
 
