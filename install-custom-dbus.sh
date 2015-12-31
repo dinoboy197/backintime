@@ -86,14 +86,14 @@ python_tmpenv=`pwd`/python-tmpenv
 
 cd dbus-python-1.2.0
 
-PYTHON=`sudo which ${system_python}` ./configure --prefix=$python_tmpenv
+PYTHON=`sudo which ${system_python}` ./configure --prefix=$python_virtualenv
 make
 make install
 
 cd ..
 
-echo Copying files from the temporary python env to the virtualenv
-cp -r $python_tmpenv/* $python_virtualenv
+#echo Copying files from the temporary python env to the virtualenv
+#cp -r $python_tmpenv/* $python_virtualenv
 
 echo $python_virtualenv
 ls -al $python_virtualenv
