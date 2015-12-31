@@ -90,4 +90,4 @@ echo $python_virtualenv
 ls -al $python_virtualenv
 ls -al $python_virtualenv/lib/python3.4/site-packages/dbus
 
-python -c "import sys; print sys.path"
+python3 -c "import sys; print(sys.path)"
