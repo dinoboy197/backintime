@@ -79,11 +79,11 @@ cd ..
 echo Copying files from the temporary python env to the virtualenv
 cp -r $python_tmpenv/* $python_virtualenv
 
-#echo $python_virtualenv
-#ls -al $python_virtualenv
-#ls -al $python_virtualenv/lib/python3.4/site-packages
-#ls -al $python_virtualenv/lib/python3.4/site-packages/dbus
+echo $python_virtualenv
+ls -al $python_virtualenv
+ls -al $python_virtualenv/lib/python3.4/site-packages
+ls -al $python_virtualenv/lib/python3.4/site-packages/dbus
 
-#which dbus-launch
+which dbus-launch
 
-#python3 -c "import sys; print(sys.path)"
+python3 -c "import sys; print(sys.path)"
