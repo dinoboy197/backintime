@@ -100,4 +100,6 @@ ls -al $python_virtualenv
 ls -al $python_virtualenv/lib/python3.4/site-packages
 ls -al $python_virtualenv/lib/python3.4/site-packages/dbus
 
+which dbus-launch
+
 python3 -c "import sys; print(sys.path)"
