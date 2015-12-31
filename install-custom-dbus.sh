@@ -21,19 +21,15 @@ python_version=`python -c 'import sys; print(".".join(map(str, sys.version_info[
 case "$python_version" in
   "3.5"*)
     system_python=python3.5
-    headers_version=3.4.4
     ;;
   "3.4"*)
     system_python=python3.4
-    headers_version=3.4.4
     ;;
   "3.3"*)
     system_python=python3.3
-    headers_version=3.3.6
     ;;
   "3.2"*)
     system_python=python3.2
-    headers_version=3.2.6
     ;;
   *)
     echo Python version was not understood. It was detected as - $python_version
