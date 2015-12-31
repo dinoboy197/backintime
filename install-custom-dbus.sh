@@ -55,16 +55,22 @@ sudo make install
 
 cd ..
 
-# download python
-#echo Downloading python-$headers_version
-#wget https://www.python.org/ftp/python/$headers_version/Python-$headers_version.tgz -O python.tar.gz -q
-#echo Unpacking python...
-#tar -zxvf python.tar.gz > /dev/null
-#rm python.tar.gz
-#echo Configuring Python to get all headers...
-#cd Python-*
-#python_src_dir=`pwd`
-#./configure
+# download dbus-glib
+
+echo Downloading dbus-glib
+wget http://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.102.tar.gz -O dbus-glib.tar.gz -q
+echo Unpacking dbus-glib...
+tar -zxvf dbus-glib.tar.gz > /dev/null
+rm dbus-glib.tar.gz
+
+cd dbus-glib-0.102
+
+./configure
+make
+sudo make install
+
+cd ..
+
 
 # download python-dbus
 echo Downloading python-dbus...
@@ -80,7 +86,7 @@ python_tmpenv=`pwd`/python-tmpenv
 
 cd dbus-python-1.2.0
 
-PYTHON=`sudo which ${system_python}` ./configure --prefix=$python_tmpenv
+PYTHON=`sudo which ${system_python}` DBUS_GLIB_CFLAGS="-I/usr/local" DBUS_GLIB_LIBS="" ./configure --prefix=$python_tmpenv
 make
 make install
 
