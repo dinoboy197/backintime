@@ -19,6 +19,10 @@ echo Trying to find python version...
 python_version=`python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))'`
 
 case "$python_version" in
+  "3.5"*)
+    system_python=python3.5
+    headers_version=3.4.4
+    ;;
   "3.4"*)
     system_python=python3.4
     headers_version=3.4.4
