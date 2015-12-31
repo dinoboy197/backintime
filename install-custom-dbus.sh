@@ -39,6 +39,8 @@ esac
 sudo apt-get update
 sudo apt-get install libdbus-glib-1-2
 
+pkg-config --exists --print-errors "dbus-glib-1 >= 0.200"
+
 # need dbus 1.6 or greater to compile python-dbus
 echo Downloading dbus...
 wget http://dbus.freedesktop.org/releases/dbus/dbus-1.6.30.tar.gz -O dbus.tar.gz -q
