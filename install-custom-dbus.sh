@@ -85,3 +85,6 @@ cd ..
 
 echo Copying files from the temporary python env to the virtualenv
 cp -r $python_tmpenv/* $python_virtualenv
+
+echo $python_virtualenv
+ls -al $python_virtualenv
