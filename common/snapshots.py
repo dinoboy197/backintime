@@ -616,13 +616,19 @@ class Snapshots:
                 pass
             self.restore_callback( callback, ok, "chmod %s %04o" % ( path.decode(errors = 'ignore'), info[0] ) )
 
-    def restore( self, snapshot_id, paths, callback = None, restore_to = '', delete = False, backup = False, no_backup = False):
+    def restore( self, snapshot_id, paths, callback = None, restore_to = '', delete = False, backup = False, no_backup = False, to_original_media = False):
         instance = applicationinstance.ApplicationInstance( self.config.get_restore_instance_file(), False, flock = True)
         if instance.check():
             instance.start_application()
         else:
             logger.warning('Restore is already running', self)
             return
+        
+        # if to_original_media is True, then we want to re-mount original disks used from snapshot info file into temporary location and restore to that
+        if to_original_media == True:
+            # TODO - read filesystem mount dict from info file
+            # TODO - verify that all filesystems with uuids are available
+            one = 1
 
         if restore_to.endswith('/'):
             restore_to = restore_to[ : -1 ]

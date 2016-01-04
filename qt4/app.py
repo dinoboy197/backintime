@@ -195,6 +195,12 @@ class MainWindow( QMainWindow ):
         QObject.connect(self.btn_restore_delete, SIGNAL('triggered()'), lambda: self.restore_this(True))
         self.menu_restore_parent_delete = self.menu_restore.addAction(icon.RESTORE, '')
         QObject.connect(self.menu_restore_parent_delete, SIGNAL('triggered()'), lambda: self.restore_parent(True))
+        self.menu_restore.addSeparator()
+        self.menu_restore_to_original_disks = self.menu_restore.addAction(icon.RESTORE, 'Restore snapshot to original disks' )
+        QObject.connect( self.menu_restore_to_original_disks, SIGNAL('triggered()'), lambda: self.restore_to_original_disks() )
+        if not tools.isRoot():
+            self.menu_restore_to_original_disks.setText("Restore snapshot to original disks (requires root to mount original disks)")
+            self.menu_restore_to_original_disks.setEnabled(False)
 
         self.btn_restore_menu = self.files_view_toolbar.addAction(icon.RESTORE, _('Restore'))
         self.btn_restore_menu.setMenu(self.menu_restore)
@@ -239,6 +245,8 @@ class MainWindow( QMainWindow ):
         self.menubar_restore.addSeparator()
         self.menubar_restore.addAction(self.btn_restore_delete)
         self.menubar_restore.addAction(self.menu_restore_parent_delete)
+        self.menubar_restore.addSeparator()
+        self.menubar_restore.addAction(self.menu_restore_to_original_disks)
 
         self.menubar_help = self.menubar.addMenu(_('Help'))
         self.menubar_help.addAction(self.btn_help)
@@ -1099,6 +1107,30 @@ class MainWindow( QMainWindow ):
             return
 
         restoredialog.restore( self, self.snapshot_id, self.path, None )
+
+    def restore_to_original_disks( self ):
+        """
+        Synchronizes all files in selected snapshot to disks used to source files for that snapshot (prompt user to unmount first otherwise and stop).
+        No manual mounting of disks are required beforehand.
+        """
+        if len( self.snapshot_id ) <= 1:
+            return
+
+        self.removeMouseButtonNavigation()
+        confirm, kwargs = self.confirm_delete_on_restore((self.path,), self.path == '/')
+
+        self.setMouseButtonNavigation()
+        if not confirm:
+            return
+
+        # restore with to_original_media = True to ensure that original media is used to destination
+        restoredialog.restore( self, self.snapshot_id, self.path, delete = True, to_original_media = True, **kwargs)
+
+    # TODO
+    #def restore_to_disks( self ):
+    #    """
+    #    Synchronizes all files in selected snapshot to disks of the user's choosing.
+    #    """
 
     def on_btn_snapshots_clicked( self ):
         selected_file, idx = self.file_selected()
